@@ -29,8 +29,24 @@ async function yallakoraFootball(date){
     if(!hhmm)return;
     const iso=date+'T'+hhmm[1].padStart(2,'0')+':'+hhmm[2]+':00+02:00';
     const goal=v=>/^\d+$/.test(v||'')?Number(v):null;
+    // Read only explicitly labelled broadcast and venue fields; never infer them.
+    const infoRoot=node.parent();
+    const labelled=(pattern)=>{
+     const labels=infoRoot.find('dt,th,.matchInfo li,.matchDetails li,.match-details li,.matchDetails p,.matchInfo p');
+     for(const el of labels.toArray()){
+      const line=clean($(el).text());
+      if(!pattern.test(line))continue;
+      const value=clean($(el).find('dd,.value,strong,span').last().text())||clean(line.replace(pattern,'').replace(/^\s*[:：-]\s*/,''));
+      if(value&&value!==line&&!pattern.test(value))return value.slice(0,120);
+      const parts=line.split(/[:：]/);if(parts.length>1&&clean(parts.slice(1).join(':')))return clean(parts.slice(1).join(':')).slice(0,120);
+     }
+     return null;
+    };
+    const commentator=labelled(/^(?:المعلق|التعليق)\s*[:：]?/);
+    const channel=labelled(/^(?:القناة الناقلة|القنوات الناقلة|القناة)\s*[:：]?/);
+    const venue=labelled(/^(?:الملعب|الاستاد|الستاد)\s*[:：]?/);
     const id=matchId(date,league,home,away);
-    matches.push({id,leagueId:leagueId(league),leagueName:league,date:iso,status:parseStatus(statusText,score),minute:null,home:{name:home,logo:node.find('.teamA img').first().attr('src')||null},away:{name:away,logo:node.find('.teamB img').first().attr('src')||null},goals:{home:goal(score[0]),away:goal(score[1])},venue:null,source:'yallakora'});
+    matches.push({id,leagueId:leagueId(league),leagueName:league,date:iso,status:parseStatus(statusText,score),minute:null,home:{name:home,logo:node.find('.teamA img').first().attr('src')||null},away:{name:away,logo:node.find('.teamB img').first().attr('src')||null},goals:{home:goal(score[0]),away:goal(score[1])},commentator,channel,venue,source:'yallakora'});
    });
   });
   if(!matches.length)throw Error('Yallakora returned no parsable matches');
