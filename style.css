@@ -246,3 +246,12 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .korastine-scorecard .watch-slot{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:7px 13px;border-radius:12px;border:1px dashed #55d7ab77;background:#2b785a20;color:#a5e9cc;font-size:13px;font-weight:800;white-space:nowrap;opacity:.85}
 .korastine-scorecard .watch-slot small{font-size:10px;color:#8faeaa;font-weight:600}
 @media(max-width:400px){.korastine-scorecard .watch-slot{font-size:12px;padding:6px 9px}.korastine-scorecard .match-bottom{gap:6px}}
+
+
+/* Palestine-inspired watch action, reserved until licensed streams exist */
+.korastine-scorecard .palestine-watch{position:relative;display:inline-flex;gap:9px;align-items:center;overflow:hidden;padding:6px 12px 6px 7px;border:1px solid #54b889;border-radius:12px;background:linear-gradient(115deg,#0b211d 0%,#10392a 65%,#0d221f 100%);color:#f8faf8;box-shadow:inset 0 1px #ffffff15;opacity:1;direction:rtl}
+.korastine-scorecard .palestine-watch:before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:linear-gradient(to bottom,#e13b46 0 34%,#fff 34% 66%,#181c22 66% 100%)}
+.korastine-scorecard .palestine-watch .watch-flag{font-size:23px;line-height:1;filter:drop-shadow(0 1px 2px #0006)}
+.korastine-scorecard .palestine-watch .watch-text{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:900}
+.korastine-scorecard .palestine-watch small{font-size:10px;color:#c2d5cb;font-weight:600}
+.mobile-bottom-nav a[data-route="home"]{touch-action:manipulation}
