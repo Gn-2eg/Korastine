@@ -2,6 +2,7 @@
 const {LEAGUES}=require('./_lib');
 const {yallakoraFootball}=require('./_yallakora');
 const {broadcastInfo,enrich}=require('./_broadcast');
+const {koraPlus,enrich:enrichKoraPlus}=require('./_koraplus');
 const cache=new Map();
 async function get(url,headers={}){const k=url;const c=cache.get(k);if(c&&c.until>Date.now())return c.value;const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),8000);try{const r=await fetch(url,{headers,signal:ctrl.signal});if(!r.ok)throw Error(`HTTP ${r.status}`);const value=await r.json();cache.set(k,{value,until:Date.now()+120000});return value;}catch(e){if(c)return c.value;throw e;}finally{clearTimeout(timer)}}
 const codes={PL:39,PD:140,CL:2};
@@ -40,7 +41,7 @@ function mergeSupplemental(matches,source){
  }
 }
 async function fixtures(date){
-  const jobs=await Promise.allSettled([yallakoraFootball(date),espnFootball(date),footballData(date),broadcastInfo(date)]);
+  const jobs=await Promise.allSettled([yallakoraFootball(date),espnFootball(date),footballData(date),broadcastInfo(date),koraPlus(date)]);
   const errors=[],matches=[],covered=new Set(),sourceCounts={};
   for(let i=0;i<3;i++){
     const job=jobs[i],name=['yallakora','espn','football-data.org'][i];
@@ -56,6 +57,9 @@ async function fixtures(date){
   const broadcast=jobs[3];
   if(broadcast.status==='fulfilled'){enrich(matches,broadcast.value,date);sourceCounts.elgoal={status:'ok',count:broadcast.value.length};}
   else{sourceCounts.elgoal={status:'error',count:0};errors.push({source:'elgoal',message:broadcast.reason.message});}
+  const kora=jobs[4];
+  if(kora.status==='fulfilled'){enrichKoraPlus(matches,kora.value);sourceCounts.koraplus={status:'ok',count:kora.value.length};}
+  else{sourceCounts.koraplus={status:'error',count:0};errors.push({source:'koraplus',message:kora.reason.message});}
   const coveredLeagueIds=[...new Set(matches.map(m=>m.leagueId))];const missingLeagues=LEAGUES.filter(l=>!coveredLeagueIds.includes(l.id)).map(l=>({id:l.id,name:l.name}));return {matches:matches.sort((a,b)=>new Date(a.date)-new Date(b.date)),errors,sourceCounts,missingLeagues};
 }
 module.exports={fixtures};
