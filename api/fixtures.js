@@ -1,8 +1,10 @@
 'use strict';
 const {LEAGUES,dateCairo,allowedDate,json,api}=require('./_lib');
 const {fixtures}=require('./_sources');
-async function winwinStandings(){
- const url='https://www.winwin.com/football/competition/'+encodeURIComponent('الدوري المصري')+'/'+encodeURIComponent('الترتيب');
+const winwinNames={233:'الدوري المصري',39:'الدوري الإنجليزي',140:'الدوري الإسباني',78:'الدوري الألماني',135:'الدوري الإيطالي',61:'الدوري الفرنسي',307:'الدوري السعودي',94:'الدوري البرتغالي',88:'الدوري الهولندي',203:'الدوري التركي',2:'دوري أبطال أوروبا',3:'الدوري الأوروبي',12:'دوري أبطال أفريقيا',20:'كأس الكونفدرالية الأفريقية',17:'دوري أبطال آسيا',253:'الدوري الأمريكي',29:'تصفيات كأس العالم أفريقيا'};
+async function winwinStandings(id){
+ const name=winwinNames[id];if(!name)return [];
+ const url='https://www.winwin.com/football/competition/'+encodeURIComponent(name.replace(/ /g,'-'))+'/'+encodeURIComponent('الترتيب');
  const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),5000);
  try{
  const response=await fetch(url,{signal:ctrl.signal,headers:{Accept:'text/html'}});if(!response.ok)return [];
@@ -19,7 +21,7 @@ async function winwinStandings(){
  if(played!==won+draw+lost||gf-ga!==difference)return;
  rows.push({rank,team,played,won,draw,lost,difference,points,logo:null});
  });
- if(rows.length>=2&&new Set(rows.map(r=>r.rank)).size===rows.length)groups.push({name:'الدوري المصري',rows});
+ if(rows.length>=2&&new Set(rows.map(r=>r.rank)).size===rows.length)groups.push({name,rows});
  });
  return groups;
  }finally{clearTimeout(timer);}
@@ -29,8 +31,8 @@ module.exports=api(async(req,res)=>{
  const slugs={39:'eng.1',140:'esp.1',78:'ger.1',135:'ita.1',61:'fra.1',307:'sau.1',94:'por.1',88:'ned.1',203:'tur.1',233:'egy.1',2:'uefa.champions',3:'uefa.europa',253:'usa.1',12:'caf.champions',20:'caf.confed',17:'afc.champions'};
  const slug=slugs[Number(req.query.league)];
  if(!slug)return json(res,200,{groups:[],scorers:[],note:'الترتيب غير متاح لهذه البطولة'});
- if(req.query.mode==='standings'&&Number(req.query.league)===233){
- try{const groups=await winwinStandings();if(groups.length)return json(res,200,{groups,source:'WinWin'},300);}catch(_){}
+ if(req.query.mode==='standings'){
+ try{const groups=await winwinStandings(Number(req.query.league));if(groups.length)return json(res,200,{groups,source:'WinWin'},300);}catch(_){}
  }
  const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),8000);
  try{
