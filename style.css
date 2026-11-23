@@ -265,3 +265,12 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
  .korastine-scorecard .palestine-watch small{font-size:9px}
  .korastine-scorecard .palestine-watch:before{width:3px}
 }
+
+
+/* Minimal Palestine-accented watch chip: no oversized flag or dashed border */
+.korastine-scorecard .watch-slot.palestine-watch{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:30px;padding:5px 10px;border:1px solid #2d805e;border-radius:8px;background:#16382d;color:#f4fff9;box-shadow:none;opacity:1;direction:rtl}
+.korastine-scorecard .watch-slot.palestine-watch:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(to bottom,#e73b45 0 33%,#fff 33% 66%,#171717 66% 100%)}
+.korastine-scorecard .palestine-watch .watch-play{display:grid;place-items:center;width:18px;height:18px;border-radius:5px;background:#277a56;color:#fff;font-size:10px;line-height:1}
+.korastine-scorecard .palestine-watch .watch-text{display:inline;font-size:11px;font-weight:800;line-height:1.1}
+.korastine-scorecard .palestine-watch .watch-coming{font-size:9px;color:#acc8b7;font-weight:600}
+@media(max-width:700px){.korastine-scorecard .watch-slot.palestine-watch{min-height:29px;padding:5px 9px;gap:5px;border-radius:8px}}
