@@ -241,36 +241,12 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 @media(max-width:480px){.korastine-scorecard .scoreboard-clock{width:64px;height:64px;flex-basis:64px}.korastine-scorecard .scoreboard-clock .clock-label{font-size:12px}.korastine-scorecard .scoreboard-clock:before,.korastine-scorecard.is-live .scoreboard-clock:before{inset:5px}}
 
 
-/* Reserved streaming action; non-interactive until a licensed link is available */
-.korastine-scorecard .match-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.korastine-scorecard .watch-slot{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:7px 13px;border-radius:12px;border:1px dashed #55d7ab77;background:#2b785a20;color:#a5e9cc;font-size:13px;font-weight:800;white-space:nowrap;opacity:.85}
-.korastine-scorecard .watch-slot small{font-size:10px;color:#8faeaa;font-weight:600}
-@media(max-width:400px){.korastine-scorecard .watch-slot{font-size:12px;padding:6px 9px}.korastine-scorecard .match-bottom{gap:6px}}
 
-
-/* Palestine-inspired watch action, reserved until licensed streams exist */
-.korastine-scorecard .palestine-watch{position:relative;display:inline-flex;gap:9px;align-items:center;overflow:hidden;padding:6px 12px 6px 7px;border:1px solid #54b889;border-radius:12px;background:linear-gradient(115deg,#0b211d 0%,#10392a 65%,#0d221f 100%);color:#f8faf8;box-shadow:inset 0 1px #ffffff15;opacity:1;direction:rtl}
-.korastine-scorecard .palestine-watch:before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:linear-gradient(to bottom,#e13b46 0 34%,#fff 34% 66%,#181c22 66% 100%)}
-.korastine-scorecard .palestine-watch .watch-flag{font-size:23px;line-height:1;filter:drop-shadow(0 1px 2px #0006)}
-.korastine-scorecard .palestine-watch .watch-text{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:900}
-.korastine-scorecard .palestine-watch small{font-size:10px;color:#c2d5cb;font-weight:600}
-.mobile-bottom-nav a[data-route="home"]{touch-action:manipulation}
-
-
-/* Compact mobile navigation and Palestine watch action */
-@media(max-width:700px){
- .korastine-scorecard .palestine-watch{min-height:30px;padding:4px 8px 4px 5px;gap:5px;border-radius:9px}
- .korastine-scorecard .palestine-watch .watch-flag{font-size:16px}
- .korastine-scorecard .palestine-watch .watch-text{font-size:11px;gap:4px}
- .korastine-scorecard .palestine-watch small{font-size:9px}
- .korastine-scorecard .palestine-watch:before{width:3px}
-}
-
-
-/* Minimal Palestine-accented watch chip: no oversized flag or dashed border */
-.korastine-scorecard .watch-slot.palestine-watch{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:30px;padding:5px 10px;border:1px solid #2d805e;border-radius:8px;background:#16382d;color:#f4fff9;box-shadow:none;opacity:1;direction:rtl}
-.korastine-scorecard .watch-slot.palestine-watch:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(to bottom,#e73b45 0 33%,#fff 33% 66%,#171717 66% 100%)}
-.korastine-scorecard .palestine-watch .watch-play{display:grid;place-items:center;width:18px;height:18px;border-radius:5px;background:#277a56;color:#fff;font-size:10px;line-height:1}
-.korastine-scorecard .palestine-watch .watch-text{display:inline;font-size:11px;font-weight:800;line-height:1.1}
-.korastine-scorecard .palestine-watch .watch-coming{font-size:9px;color:#acc8b7;font-weight:600}
-@media(max-width:700px){.korastine-scorecard .watch-slot.palestine-watch{min-height:29px;padding:5px 9px;gap:5px;border-radius:8px}}
+/* Fresh Korastine watch action: clean, compact, and visually distinct */
+.korastine-scorecard .match-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.korastine-scorecard .watch-next{display:inline-flex;align-items:center;gap:9px;min-height:40px;padding:5px 12px 5px 6px;border-radius:11px;background:linear-gradient(125deg,#173c34,#1b5242);border:1px solid #3a9977;color:#fff;direction:rtl;white-space:nowrap;box-shadow:0 3px 10px #0002}
+.korastine-scorecard .watch-next-icon{display:grid;place-items:center;width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:#e9fff5;color:#145c42;font-size:12px;padding-left:2px}
+.korastine-scorecard .watch-next-copy{display:flex;flex-direction:column;align-items:flex-start;gap:2px;line-height:1.1}
+.korastine-scorecard .watch-next-copy b{font-size:12px;font-weight:900}
+.korastine-scorecard .watch-next-copy small{font-size:9px;font-weight:700;color:#c0ded2}
+@media(max-width:480px){.korastine-scorecard .watch-next{min-height:35px;padding:4px 9px 4px 5px;gap:7px;border-radius:9px}.korastine-scorecard .watch-next-icon{width:24px;height:24px;flex-basis:24px;font-size:10px}.korastine-scorecard .watch-next-copy b{font-size:11px}}
