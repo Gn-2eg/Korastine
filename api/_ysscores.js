@@ -4,6 +4,8 @@ const ROOT='https://www.ysscores.com';
 const clean=s=>String(s||'').replace(/\s+/g,' ').trim();
 const norm=s=>clean(s).toLowerCase().replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[ًٌٍَُِّْـ]/g,'').replace(/[^a-z0-9\u0621-\u064a]/g,'');
 const similar=(a,b)=>{const x=norm(a),y=norm(b);return x.length>3&&y.length>3&&(x===y||(x.length>=6&&y.length>=6&&(x.includes(y)||y.includes(x))))};
+const words=s=>clean(s).toLowerCase().replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[ًٌٍَُِّْـ]/g,'').replace(/[^a-z0-9\u0621-\u064a]+/g,' ').trim();
+const hasTeam=(text,name)=>{const n=words(name);return n.length>=3&&(' '+words(text)+' ').includes(' '+n+' ');};
 const day=iso=>new Intl.DateTimeFormat('en-CA',{timeZone:'Africa/Cairo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(iso));
 async function page(url){
  const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),5000);
@@ -30,14 +32,14 @@ function candidates(html){
  return [...out.values()];
 }
 async function ysscores(matches,date){
- const needed=matches.filter(m=>day(m.date)===date&&(!m.venue||!m.channel||!m.commentator||!m.referee));
+ const needed=matches.filter(m=>day(m.date)===date&&(!m.venue||!m.channel||!m.commentator||!m.referee||!m.round));
  if(!needed.length)return {checked:0,updated:0,links:0};
  const home=await page(ROOT+'/ar/home');
  const links=candidates(home);
  // Only fetch links whose nearby card identifies both teams. Never infer a match from a slug alone.
  const selections=[];
  for(const m of needed){
-  const found=links.filter(x=>similar(x.text,m.home?.name)&&similar(x.text,m.away?.name));
+  const found=links.filter(x=>hasTeam(x.text,m.home?.name)&&hasTeam(x.text,m.away?.name));
   if(found.length===1&&!selections.some(s=>s.url===found[0].url))selections.push({match:m,url:found[0].url});
  }
  let checked=0,updated=0;
