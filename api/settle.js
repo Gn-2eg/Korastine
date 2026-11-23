@@ -2,7 +2,7 @@
 const {dateCairo,json}=require('./_lib');
 const {fixtures}=require('./_sources');
 module.exports=async(req,res)=>{
- if(req.method!=='POST')return json(res,405,{error:'Method not allowed'});
+ if(!['GET','POST'].includes(req.method))return json(res,405,{error:'Method not allowed'});
  const expected=process.env.CRON_SECRET;
  if(!expected||req.headers.authorization!==`Bearer ${expected}`)return json(res,401,{error:'Unauthorized'});
  const url=process.env.SUPABASE_URL,serviceKey=process.env.SUPABASE_SERVICE_ROLE_KEY;
