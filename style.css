@@ -255,3 +255,15 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .korastine-scorecard .palestine-watch .watch-text{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:900}
 .korastine-scorecard .palestine-watch small{font-size:10px;color:#c2d5cb;font-weight:600}
 .mobile-bottom-nav a[data-route="home"]{touch-action:manipulation}
+
+
+/* Compact mobile navigation and Palestine watch action */
+@media(max-width:700px){
+ .mobile-bottom-nav a{font-size:9px;gap:2px;min-height:43px;padding:3px 2px}
+ .mobile-bottom-nav a span{font-size:17px;line-height:1}
+ .korastine-scorecard .palestine-watch{min-height:30px;padding:4px 8px 4px 5px;gap:5px;border-radius:9px}
+ .korastine-scorecard .palestine-watch .watch-flag{font-size:16px}
+ .korastine-scorecard .palestine-watch .watch-text{font-size:11px;gap:4px}
+ .korastine-scorecard .palestine-watch small{font-size:9px}
+ .korastine-scorecard .palestine-watch:before{width:3px}
+}
