@@ -188,3 +188,8 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .developer-3d-name{direction:rtl;text-align:center}
 .developer-3d-subtitle{display:block;direction:ltr;unicode-bidi:isolate;white-space:nowrap;text-align:center;width:auto;max-width:100%;font-family:Arial,sans-serif;font-size:9px;font-weight:700;line-height:1.5;letter-spacing:1.5px;transform:none;margin:0;padding:0;color:#a9eec2;text-shadow:0 0 6px #35e77a44}
 @media(max-width:700px){.developer-3d-signature{gap:2px}.developer-3d-subtitle{font-size:8px;letter-spacing:1px}}
+
+/* Gold 3D developer signature */
+.developer-3d-name{color:#fff1bc;text-shadow:1px 1px 0 #e8bd57,2px 2px 0 #b98528,3px 3px 1px #815915,3px 4px 3px #48300c,0 0 9px #ffd86b80,0 0 19px #ffbf3860}
+.developer-3d-name:hover{text-shadow:1px 1px 0 #e8bd57,2px 2px 0 #b98528,3px 3px 1px #815915,4px 5px 4px #48300c,0 0 12px #ffd86b99,0 0 23px #ffbf3870}
+.developer-3d-subtitle{color:#eacb80;text-shadow:0 0 6px #ffc85a44}
