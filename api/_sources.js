@@ -12,10 +12,10 @@ function normalizeESPN(event,leagueId){const competition=event.competitions?.[0]
 async function espnFootball(date){const compact=date.replace(/-/g,'');const settled=await Promise.allSettled(espnLeagues.map(async ([slug,id])=>{const url='https://site.api.espn.com/apis/site/v2/sports/soccer/'+slug+'/scoreboard?dates='+compact+'&limit=100';const data=await get(url);return (data.events||[]).map(e=>normalizeESPN(e,id)).filter(Boolean);}));const result=settled.flatMap(r=>r.status==='fulfilled'?r.value:[]);if(!result.length&&settled.every(r=>r.status==='rejected'))throw Error('ESPN fallback unavailable');return result;}
 async function fixtures(date){
   const jobs=await Promise.allSettled([apiFootball(date),footballData(date),espnFootball(date)]);
-  const errors=[],matches=[],covered=new Set();
+  const errors=[],matches=[],covered=new Set(),sourceCounts={};
   for(let i=0;i<jobs.length;i++){
     const job=jobs[i],name=['api-football','football-data.org','espn'][i];
-    if(job.status==='rejected'){errors.push({source:name,message:job.reason.message});continue;}
+    if(job.status==='rejected'){sourceCounts[name]={status:'error',count:0};errors.push({source:name,message:job.reason.message});continue;}sourceCounts[name]={status:'ok',count:job.value.length};
     for(const m of job.value){
       // Prefer the licensed API provider and preserve its fixture IDs for predictions.
       // Only use secondary providers for leagues with no primary fixtures on this date.
@@ -24,6 +24,6 @@ async function fixtures(date){
     }
     for(const m of job.value)covered.add(m.leagueId);
   }
-  return {matches:matches.sort((a,b)=>new Date(a.date)-new Date(b.date)),errors};
+  return {matches:matches.sort((a,b)=>new Date(a.date)-new Date(b.date)),errors,sourceCounts};
 }
 module.exports={fixtures};
