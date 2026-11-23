@@ -116,3 +116,7 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 }
 @media(max-width:360px){.brand{font-size:17px}#accountButton{max-width:105px;font-size:9px}.match-team{font-size:11px}.hero h1{font-size:40px}}
 @media(prefers-reduced-motion:reduce){.match-card,.btn{transition:none}.match-card:hover{transform:none}}
+
+/* First-login football preferences */
+.favorites-modal{width:min(460px,calc(100vw - 28px));max-height:min(90dvh,740px);overflow:auto;padding:26px;background:linear-gradient(150deg,#192e30,#111a23 70%);border:1px solid #3b6257}
+.favorites-intro{text-align:center;margin-bottom:22px}.favorites-ball{display:block;font-size:43px;margin-bottom:8px}.favorites-intro h2{font-size:24px;margin:9px 0}.favorites-intro p{font-size:12px;color:var(--muted);line-height:1.8;margin:0}.favorites-modal form>label{display:block;font-size:13px;font-weight:800;margin:15px 0 7px}.favorites-modal select,.favorites-modal input{width:100%;min-width:0}.favorites-modal .text-button{margin-top:8px}.favorites-modal #favoritesError{color:#ff9ca4;margin-top:10px}.favorites-modal #favoritesHint{font-size:11px;margin:9px 0 15px}@media(max-width:700px){.favorites-modal{padding:19px}.favorites-intro h2{font-size:21px}}
