@@ -3,6 +3,7 @@ const {LEAGUES}=require('./_lib');
 const {yallakoraFootball}=require('./_yallakora');
 const {broadcastInfo,enrich}=require('./_broadcast');
 const {koraPlus,enrich:enrichKoraPlus}=require('./_koraplus');
+const {ysscores}=require('./_ysscores');
 const cache=new Map();
 async function get(url,headers={}){const k=url;const c=cache.get(k);if(c&&c.until>Date.now())return c.value;const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),8000);try{const r=await fetch(url,{headers,signal:ctrl.signal});if(!r.ok)throw Error(`HTTP ${r.status}`);const value=await r.json();cache.set(k,{value,until:Date.now()+120000});return value;}catch(e){if(c)return c.value;throw e;}finally{clearTimeout(timer)}}
 const codes={PL:39,PD:140,CL:2};
@@ -60,6 +61,8 @@ async function fixtures(date){
   const kora=jobs[4];
   if(kora.status==='fulfilled'){enrichKoraPlus(matches,kora.value);sourceCounts.koraplus={status:'ok',count:kora.value.length};}
   else{sourceCounts.koraplus={status:'error',count:0};errors.push({source:'koraplus',message:kora.reason.message});}
+  try{const stats=await ysscores(matches,date);sourceCounts.ysscores={status:'ok',...stats};}
+  catch(e){sourceCounts.ysscores={status:'error',count:0};errors.push({source:'ysscores',message:e.message});}
   const coveredLeagueIds=[...new Set(matches.map(m=>m.leagueId))];const missingLeagues=LEAGUES.filter(l=>!coveredLeagueIds.includes(l.id)).map(l=>({id:l.id,name:l.name}));return {matches:matches.sort((a,b)=>new Date(a.date)-new Date(b.date)),errors,sourceCounts,missingLeagues};
 }
 module.exports={fixtures};
