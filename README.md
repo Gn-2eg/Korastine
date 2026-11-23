@@ -1,35 +1,25 @@
-# KORASTINE — Live Football Data v0.3
+# KORASTINE — Vercel-ready v0.5
 
-This is the previous premium prototype with a new real-data integration. **No real match data is included or fabricated.** You must configure an API-FOOTBALL key to retrieve live fixtures.
+Arabic RTL football platform prototype for 6 leagues, with API-FOOTBALL serverless backend.
 
-## Start
+## Deploy from GitHub to Vercel
 
-Requires Node.js 20+ (built-in fetch, no npm dependencies).
+1. Import the GitHub repository on Vercel.
+2. Choose **Framework Preset: Other**, Root Directory `./`, leave Build Command and Output Directory **blank/default**.
+3. Set an Environment Variable named `API_FOOTBALL_KEY` to a **fresh, private** API-FOOTBALL key. Do **not** add the actual key to files or Git history.
+4. Deploy. Check `/api/health` (must show `configured: true`) and `/api/fixtures`.
 
-macOS/Linux:
-```bash
-export API_FOOTBALL_KEY='YOUR_KEY'
-node server/server.js
-```
-Windows PowerShell:
-```powershell
-$env:API_FOOTBALL_KEY='YOUR_KEY'
-node server/server.js
-```
-Open http://localhost:3000 (do not open index.html as a file for API integration).
+## Serverless endpoints
 
-Get a key: https://dashboard.api-football.com/register
+- `/api/health` — key configuration, without exposing its value.
+- `/api/leagues` — the six competition IDs.
+- `/api/fixtures` — next fixtures from each competition (parallel calls).
+- `/api/today` — matches today (UTC date) in six leagues.
 
-## Endpoints
-- GET /api/health — configuration and requests count
-- GET /api/leagues — six supported competitions
-- GET /api/fixtures — next fixtures for six competitions
-- GET /api/today — today's fixtures in supported competitions (UTC date)
+## Important limitations
 
-## Notes
-- The free API plan limits season availability and has a daily quota. Some competitions may return no fixtures or provider errors. The UI shows a clear status and never disguises demo data as live.
-- Each league fetch is cached for 30 minutes. Daily safety threshold of 90 provider requests leaves margin under the advertised 100/day free plan.
-- League IDs: 233 Egyptian Premier League, 39 Premier League, 140 La Liga, 203 Süper Lig, 2 Champions League, 3 Europa League. Confirm coverage in your provider dashboard.
-- The fixtures endpoint currently loads the next 20 matches per competition. To show historical matches, live fixtures, or richer statistics, add season-aware and date-filtered endpoints.
-- Keep the key server-side. Never commit it or paste it into browser code.
-- Predictions and streaming remain demo-only. This API supplies football data, **not** streaming rights.
+- API-FOOTBALL free plans may not provide current-season data across all leagues.
+- Serverless functions don't share persistent in-memory caches or rate limits. This version does **not** implement server-side quota protection. Every page load can trigger six provider calls, so monitor API usage and add a persistent cache before public traffic. Limit automatic polling.
+- The `/api/fixtures` endpoint only loads upcoming fixtures, not currently live or completed games.
+- Predictions, leaderboards and streaming are still demos; no unauthorized broadcasts are provided.
+- `index.html` is a static frontend, and `api/*` are Vercel Node functions. `server/server.js` from earlier versions is not required here.
