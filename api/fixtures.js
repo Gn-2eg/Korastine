@@ -1,12 +1,9 @@
-const {leagues,normalize,upstream,api}=require('./_shared');
-module.exports=api(async()=>{
-  // The API-FOOTBALL free plan does not support `next=20`.
-  // Request today's fixtures by date instead (one provider request).
-  const date=new Date().toISOString().slice(0,10);
-  const data=await upstream(`fixtures?date=${date}`);
-  const matches=(data.response||[])
-    .filter(f=>leagues.some(l=>l.id===f.league.id))
-    .map(normalize)
-    .sort((a,b)=>new Date(a.date)-new Date(b.date));
-  return {matches,leagues,errors:[],updatedAt:new Date().toISOString(),mode:'live'};
+'use strict';
+const {LEAGUES,dateCairo,allowedDate,json,api}=require('./_lib');
+const {fixtures}=require('./_sources');
+module.exports=api(async(req,res)=>{
+ const date=typeof req.query?.date==='string'?req.query.date:dateCairo();
+ if(!allowedDate(date)||![dateCairo(-1),dateCairo(),dateCairo(1)].includes(date))return json(res,400,{error:'اختار أمس أو اليوم أو بكرة فقط'});
+ const {matches,errors}=await fixtures(date);
+ return json(res,200,{date,matches,leagues:LEAGUES,errors,updatedAt:new Date().toISOString(),note:'التغطية تختلف حسب المصدر والخطة؛ النتائج قد تتأخر'},120);
 });

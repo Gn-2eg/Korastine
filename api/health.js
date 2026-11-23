@@ -1,2 +1,1 @@
-const {key,api}=require('./_shared');
-module.exports=api(async()=>({ok:true,configured:!!key}));
+const {json,api}=require('./_lib');module.exports=api(async(req,res)=>json(res,200,{ok:true,footballConfigured:!!(process.env.API_FOOTBALL_KEY||process.env.FOOTBALL_DATA_TOKEN),sources:{footballData:!!process.env.FOOTBALL_DATA_TOKEN,apiFootball:!!process.env.API_FOOTBALL_KEY},authConfigured:!!(process.env.SUPABASE_URL&&(process.env.SUPABASE_PUBLISHABLE_KEY||process.env.SUPABASE_ANON_KEY)),scoringConfigured:!!(process.env.SUPABASE_SERVICE_ROLE_KEY&&process.env.CRON_SECRET)}));
