@@ -127,3 +127,14 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .developer-credit-name{font-size:13px;font-weight:800;color:#f0d18e;letter-spacing:.5px}
 .developer-credit-line{height:1px;width:30px;background:linear-gradient(90deg,transparent,#c6a86e88,transparent)}
 @media(max-width:700px){.developer-credit{gap:7px;margin-top:17px;padding-top:17px}.developer-credit-label{font-size:10px}.developer-credit-name{font-size:12px}.developer-credit-line{width:17px}}
+
+/* Youthful developer signature */
+.developer-credit{width:fit-content;max-width:100%;margin:23px auto 0;padding:13px 20px;display:flex;align-items:center;gap:13px;border:1px solid #3d6058;border-radius:16px;background:linear-gradient(120deg,#132b2a,#17202b 65%,#251d2a);box-shadow:0 8px 30px #0004,0 0 26px #36d99b0c;text-align:left;transition:transform .2s ease,border-color .2s ease}
+.developer-credit:hover{transform:translateY(-3px);border-color:#45cf91}
+.dev-code-mark{display:grid;place-items:center;width:42px;height:42px;flex:none;border-radius:12px;background:#35d68b1a;border:1px solid #35d68b55;color:#5ef0ab;font:900 18px Arial,sans-serif}
+.dev-signature{display:flex;flex-direction:column;gap:5px;min-width:0}
+.developer-credit-label{font:800 9px Arial,sans-serif;letter-spacing:2px;color:#85b5ad}
+.developer-credit-name{font:800 clamp(13px,3.5vw,17px) Arial,sans-serif;letter-spacing:.2px;color:#fff;white-space:nowrap}
+.dev-spark{color:#57e6a6;margin-left:8px;font-size:16px}
+@media(max-width:700px){.developer-credit{padding:11px 14px;gap:10px;margin-top:19px}.dev-code-mark{width:36px;height:36px;font-size:16px}.developer-credit-label{font-size:8px;letter-spacing:1.4px}.developer-credit-name{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.developer-credit{transition:none}}
