@@ -259,8 +259,6 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 
 /* Compact mobile navigation and Palestine watch action */
 @media(max-width:700px){
- .mobile-bottom-nav a{font-size:9px;gap:2px;min-height:43px;padding:3px 2px}
- .mobile-bottom-nav a span{font-size:17px;line-height:1}
  .korastine-scorecard .palestine-watch{min-height:30px;padding:4px 8px 4px 5px;gap:5px;border-radius:9px}
  .korastine-scorecard .palestine-watch .watch-flag{font-size:16px}
  .korastine-scorecard .palestine-watch .watch-text{font-size:11px;gap:4px}
