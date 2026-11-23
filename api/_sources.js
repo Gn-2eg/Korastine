@@ -1,5 +1,6 @@
 'use strict';
 const {LEAGUES}=require('./_lib');
+const {yallakoraFootball}=require('./_yallakora');
 const cache=new Map();
 async function get(url,headers={}){const k=url;const c=cache.get(k);if(c&&c.until>Date.now())return c.value;const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),8000);try{const r=await fetch(url,{headers,signal:ctrl.signal});if(!r.ok)throw Error(`HTTP ${r.status}`);const value=await r.json();cache.set(k,{value,until:Date.now()+120000});return value;}catch(e){if(c)return c.value;throw e;}finally{clearTimeout(timer)}}
 const codes={PL:39,PD:140,CL:2};
@@ -25,13 +26,13 @@ async function espnFootball(date){
   return result;
 }
 async function fixtures(date){
-  const jobs=await Promise.allSettled([espnFootball(date),footballData(date)]);
+  const jobs=await Promise.allSettled([yallakoraFootball(date),espnFootball(date),footballData(date)]);
   const errors=[],matches=[],covered=new Set(),sourceCounts={};
   for(let i=0;i<jobs.length;i++){
-    const job=jobs[i],name=['espn','football-data.org'][i];
+    const job=jobs[i],name=['yallakora','espn','football-data.org'][i];
     if(job.status==='rejected'){sourceCounts[name]={status:'error',count:0};errors.push({source:name,message:job.reason.message});continue;}sourceCounts[name]={status:'ok',count:job.value.length};
     for(const m of job.value){
-      // Prefer ESPN; only use another provider when a league has no ESPN fixtures on this date.
+      // Prefer Yallakora for covered competitions, then use ESPN and football-data for gaps.
       if(i>0&&covered.has(m.leagueId))continue;
       matches.push(m);
     }
