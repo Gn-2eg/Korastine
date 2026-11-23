@@ -280,3 +280,5 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .korastine-scorecard .match-team img{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;object-fit:contain}
 
 .standings-scroll{overflow-x:auto}.standings-table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap}.standings-table th,.standings-table td{padding:10px 7px;border-bottom:1px solid #ffffff16;text-align:center}.standings-table td:nth-child(2),.standings-table th:nth-child(2){text-align:start}.standings-table td:last-child{color:#24bd91;font-weight:800}.standings-table th{color:#a9c6bd}
+
+.standings-crest{width:25px;height:25px;object-fit:contain;background:transparent;border:0;border-radius:0;vertical-align:middle;margin-inline-end:7px}.standings-table td{vertical-align:middle}
