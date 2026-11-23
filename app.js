@@ -3,6 +3,28 @@ const $=id=>document.getElementById(id);
 const leagueData=[{id:233,name:'🇪🇬 الدوري المصري'},{id:39,name:'🏴 الدوري الإنجليزي'},{id:140,name:'🇪🇸 الدوري الإسباني'},{id:203,name:'🇹🇷 الدوري التركي'},{id:2,name:'🏆 دوري أبطال أوروبا'},{id:3,name:'🇪🇺 الدوري الأوروبي'},{id:307,name:'🇸🇦 الدوري السعودي'},{id:253,name:'🇺🇸 الدوري الأمريكي MLS'},{id:78,name:'🇩🇪 الدوري الألماني'},{id:135,name:'🇮🇹 الدوري الإيطالي'},{id:61,name:'🇫🇷 الدوري الفرنسي'},{id:94,name:'🇵🇹 الدوري البرتغالي'},{id:88,name:'🇳🇱 الدوري الهولندي'},{id:17,name:'🏆 دوري أبطال آسيا'},{id:12,name:'🌍 دوري أبطال أفريقيا'},{id:20,name:'🌍 كأس الكونفدرالية الأفريقية'},{id:29,name:'🌍 تصفيات كأس العالم - أفريقيا'}];
 const state={day:0,league:'all',matches:[],selected:null,supabase:null,user:null,profile:null,authMode:'login',authDiagnostic:'',cache:new Map(),favoritesPromptedFor:null};
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+const crestCache=new Map();
+async function cleanCrest(img){
+ const url=img.currentSrc||img.src;if(!url||url.startsWith('data:')||img.dataset.crestProcessed)return;
+ img.dataset.crestProcessed='1';
+ try{
+ if(!crestCache.has(url))crestCache.set(url,(async()=>{
+ const source=new Image();source.crossOrigin='anonymous';source.src=url;await source.decode();
+ const scale=Math.min(1,256/Math.max(source.width,source.height)),w=Math.max(1,Math.round(source.width*scale)),h=Math.max(1,Math.round(source.height*scale));
+ const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d');ctx.drawImage(source,0,0,w,h);
+ const data=ctx.getImageData(0,0,w,h),p=data.data,seen=new Uint8Array(w*h),q=[];
+ const add=i=>{if(seen[i])return;seen[i]=1;const k=i*4;if(p[k+3]>0&&Math.min(p[k],p[k+1],p[k+2])>=240&&Math.max(p[k],p[k+1],p[k+2])-Math.min(p[k],p[k+1],p[k+2])<=12)q.push(i);};
+ for(let x=0;x<w;x++){add(x);add((h-1)*w+x);}for(let y=0;y<h;y++){add(y*w);add(y*w+w-1);}
+ for(let j=0;j<q.length;j++){const i=q[j];p[i*4+3]=0;if(i%w)add(i-1);if(i%w<w-1)add(i+1);if(i>=w)add(i-w);if(i<w*(h-1))add(i+w);}
+ if(!q.length||q.length>w*h*.85)return null;ctx.putImageData(data,0,0);return canvas.toDataURL('image/png');
+ })().catch(()=>null));
+ const result=await crestCache.get(url);if(result&&img.isConnected&&(img.currentSrc||img.src)===url)img.src=result;
+ if(crestCache.size>300)crestCache.delete(crestCache.keys().next().value);
+ }catch(_){}
+}
+document.addEventListener('load',e=>{if(e.target instanceof HTMLImageElement&&e.target.matches('.match-team img,.standings-crest'))cleanCrest(e.target);},true);
+
 function toast(message){const el=$('toast');el.textContent=message;el.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.style.display='none',3800);}
 function cairoDate(offset=0){const d=new Date(Date.now()+offset*86400000);return new Intl.DateTimeFormat('en-CA',{timeZone:'Africa/Cairo',year:'numeric',month:'2-digit',day:'2-digit'}).format(d);}
 function dateLabel(iso){const d=new Date(iso);return Number.isNaN(d.getTime())?'موعد غير محدد':new Intl.DateTimeFormat('ar-EG',{timeZone:'Africa/Cairo',hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'}).format(d);}
