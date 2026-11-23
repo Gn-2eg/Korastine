@@ -212,3 +212,21 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .korastine-scorecard .scoreboard-clock span{position:relative;z-index:1;color:#78e9ca;font-weight:900;font-size:13px;white-space:nowrap}
 .korastine-scorecard.is-live .scoreboard-clock{box-shadow:0 0 18px #31b99135}
 @media(max-width:480px){.korastine-scorecard .match-teams{grid-template-columns:minmax(0,1fr) 116px minmax(0,1fr);gap:3px}.korastine-scorecard .scoreboard-clock{width:60px;height:60px;flex-basis:60px}.korastine-scorecard .scoreboard-numbers>strong{font-size:23px}.korastine-scorecard .match-team img{width:48px!important;height:48px!important}.korastine-scorecard .match-team{font-size:12px}}
+
+
+/* Korastine animated live-score experience */
+.korastine-scorecard.is-live:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 24%,#57e2b309 45%,transparent 66%);transform:translateX(-120%);animation:korastine-sheen 6s ease-in-out infinite}
+.korastine-scorecard.is-live .scoreboard-clock{isolation:isolate;animation:korastine-clock-glow 2.6s ease-in-out infinite}
+.korastine-scorecard.is-live .scoreboard-clock:before{inset:6px}
+.korastine-scorecard.is-live .scoreboard-clock:after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px dashed #7fe9c755;animation:korastine-spin 18s linear infinite}
+.korastine-scorecard.is-live .scoreboard-clock>span{animation:korastine-clock-text 2.4s ease-in-out infinite}
+.korastine-scorecard .goal-orb{position:absolute;z-index:3;left:50%;top:50%;font-size:13px;font-style:normal;line-height:1;transform:rotate(calc(-95deg + var(--i)*min(38deg,220deg/var(--count)))) translateX(42px) rotate(calc(95deg - var(--i)*min(38deg,220deg/var(--count))));filter:drop-shadow(0 2px 3px #0009);animation:korastine-ball-bob 1.8s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-0.22s)}
+.korastine-scorecard.is-live .status-dot{animation:korastine-live-pulse 1.3s ease-in-out infinite}
+@keyframes korastine-sheen{0%,55%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
+@keyframes korastine-clock-glow{0%,100%{box-shadow:0 0 9px #35d6aa22}50%{box-shadow:0 0 24px #35d6aa66}}
+@keyframes korastine-spin{to{transform:rotate(360deg)}}
+@keyframes korastine-clock-text{0%,100%{opacity:1}50%{opacity:.72}}
+@keyframes korastine-ball-bob{from{margin-top:-3px}to{margin-top:3px}}
+@keyframes korastine-live-pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 #4ddbb055}60%{opacity:.7;box-shadow:0 0 0 7px #4ddbb000}}
+@media(max-width:480px){.korastine-scorecard .goal-orb{font-size:10px;transform:rotate(calc(-95deg + var(--i)*min(38deg,220deg/var(--count)))) translateX(34px) rotate(calc(95deg - var(--i)*min(38deg,220deg/var(--count))))}}
+@media(prefers-reduced-motion:reduce){.korastine-scorecard.is-live:after,.korastine-scorecard.is-live .scoreboard-clock,.korastine-scorecard.is-live .scoreboard-clock:after,.korastine-scorecard.is-live .scoreboard-clock>span,.korastine-scorecard .goal-orb,.korastine-scorecard.is-live .status-dot{animation:none!important}}
