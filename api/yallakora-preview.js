@@ -15,12 +15,12 @@ module.exports=api(async(req,res)=>{
   $('.matchCard').each((_,el)=>{
    const card=$(el),name=tidy(card.find('h2').first().text());
    const matches=[];
-   card.find('li').each((_,li)=>{
-    const node=$(li),home=tidy(node.find('.teamA').first().text()),away=tidy(node.find('.teamB').first().text());
+   card.find('.gameCntnr').each((_,game)=>{
+    const node=$(game),home=tidy(node.find('.teamA p').first().text()),away=tidy(node.find('.teamB p').first().text());
     if(!home||!away)return;
     const scores=node.find('.MResult .score').map((_,n)=>tidy($(n).text())).get();
     const time=tidy(node.find('.MResult .time').first().text());
-    const status=tidy(node.find('.matchStatus,.status,.match-status').first().text());
+    const status=tidy(node.find('.matchStatus').first().text());
     matches.push({home,away,scores,time,status});
    });
    if(name&&matches.length)leagues.push({name,matches});
