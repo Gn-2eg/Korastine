@@ -250,3 +250,18 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .korastine-scorecard .watch-next-copy{display:inline-flex;align-items:center;gap:4px;font:inherit;white-space:nowrap}
 .korastine-scorecard .watch-next-copy small{font:600 9px/1.2 Cairo,Tahoma,sans-serif;color:#a7cabb}
 @media(max-width:380px){.korastine-scorecard .watch-next{padding:4px 6px;gap:4px;max-width:110px}.korastine-scorecard .watch-next-copy{font-size:10px}.korastine-scorecard .watch-next-copy small{font-size:8px}}
+
+
+/* Expandable fixture information */
+.korastine-scorecard .match-info{margin-top:12px;border-top:1px solid #ffffff18;padding-top:9px}
+.korastine-scorecard .match-info summary{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;list-style:none;color:#c6e6dc;font-size:12px;font-weight:800;padding:5px 2px;user-select:none}
+.korastine-scorecard .match-info summary::-webkit-details-marker{display:none}
+.korastine-scorecard .match-info summary:focus-visible{outline:2px solid #64dcb1;outline-offset:3px;border-radius:4px}
+.korastine-scorecard .match-info-chevron{font-size:19px;line-height:1;transition:transform .2s ease}
+.korastine-scorecard .match-info[open] .match-info-chevron{transform:rotate(180deg)}
+.korastine-scorecard .match-info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:12px 0 4px}
+.korastine-scorecard .match-info-item{display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;padding:10px 5px;border-radius:10px;background:#ffffff08;border:1px solid #ffffff10;min-width:0}
+.korastine-scorecard .match-info-item>span{color:#a3bcb6;font-size:11px}
+.korastine-scorecard .match-info-item strong{color:#eefbf6;font-size:11px;font-weight:700;overflow-wrap:anywhere;line-height:1.6}
+@media(max-width:390px){.korastine-scorecard .match-info-grid{gap:5px}.korastine-scorecard .match-info-item{padding:8px 3px}.korastine-scorecard .match-info-item strong{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.korastine-scorecard .match-info-chevron{transition:none}}
