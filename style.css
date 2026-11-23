@@ -193,3 +193,22 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .developer-3d-name{color:#fff1bc;text-shadow:1px 1px 0 #e8bd57,2px 2px 0 #b98528,3px 3px 1px #815915,3px 4px 3px #48300c,0 0 9px #ffd86b80,0 0 19px #ffbf3860}
 .developer-3d-name:hover{text-shadow:1px 1px 0 #e8bd57,2px 2px 0 #b98528,3px 3px 1px #815915,4px 5px 4px #48300c,0 0 12px #ffd86b99,0 0 23px #ffbf3870}
 .developer-3d-subtitle{color:#eacb80;text-shadow:0 0 6px #ffc85a44}
+
+
+/* Korastine original live-score cards */
+.korastine-scorecard{position:relative;overflow:hidden;background:linear-gradient(140deg,#151d2b,#101820)!important;border:1px solid #2d3a49!important;border-radius:22px!important;box-shadow:0 12px 32px #0003}
+.korastine-scorecard.is-live{border-color:#38cfa67a!important}
+.korastine-scorecard .match-meta{color:#c3d4de}
+.korastine-scorecard .match-teams{grid-template-columns:minmax(0,1fr) minmax(126px,1.05fr) minmax(0,1fr);gap:8px;margin:19px 0}
+.korastine-scorecard .match-team{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;min-width:0;font-weight:800;line-height:1.45;text-align:center}
+.korastine-scorecard .match-team img{width:58px!important;height:58px!important;max-width:100%;object-fit:contain;border-radius:50%;background:#ffffff0a;padding:5px}
+.korastine-scorecard .match-team>span:last-child{overflow-wrap:anywhere}
+.korastine-scorecard .team-placeholder{font-size:30px}
+.korastine-scorecard .scoreboard-center{min-width:0}
+.korastine-scorecard .scoreboard-numbers{display:flex;align-items:center;justify-content:center;gap:6px;direction:ltr}
+.korastine-scorecard .scoreboard-numbers>strong{font:900 clamp(22px,3.8vw,36px)/1 Arial,sans-serif;min-width:21px;color:#f5f8ff}
+.korastine-scorecard .scoreboard-clock{width:74px;height:74px;flex:0 0 74px;border-radius:50%;background:conic-gradient(#4ddbb0 var(--progress),#273446 0);display:grid;place-items:center;position:relative}
+.korastine-scorecard .scoreboard-clock:before{content:"";position:absolute;inset:5px;border-radius:50%;background:#152230}
+.korastine-scorecard .scoreboard-clock span{position:relative;z-index:1;color:#78e9ca;font-weight:900;font-size:13px;white-space:nowrap}
+.korastine-scorecard.is-live .scoreboard-clock{box-shadow:0 0 18px #31b99135}
+@media(max-width:480px){.korastine-scorecard .match-teams{grid-template-columns:minmax(0,1fr) 116px minmax(0,1fr);gap:3px}.korastine-scorecard .scoreboard-clock{width:60px;height:60px;flex-basis:60px}.korastine-scorecard .scoreboard-numbers>strong{font-size:23px}.korastine-scorecard .match-team img{width:48px!important;height:48px!important}.korastine-scorecard .match-team{font-size:12px}}
