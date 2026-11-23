@@ -1,0 +1,1 @@
+KORASTINE v0.6: Mobile responsive layout and API-FOOTBALL free plan fix. Replace files at repository root; keep API_FOOTBALL_KEY only in Vercel environment variables. /api/fixtures returns supported league matches for the current UTC date. API free-plan coverage may be limited. CDN caching 15 minutes.
