@@ -182,3 +182,9 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .developer-3d-name:hover{text-shadow:1px 1px 0 #3fc77b,2px 2px 0 #218e53,3px 3px 1px #115c38,4px 5px 4px #073d26,0 0 12px #4cff9799,0 0 23px #23dc7370}
 .developer-3d-subtitle{font-size:7px;letter-spacing:1.5px;color:#88d6a6;text-shadow:0 0 7px #35e77a44}
 @media(max-width:700px){.developer-3d-signature{padding:3px 8px calc(78px + env(safe-area-inset-bottom,0px))}.developer-3d-name{font-size:22px}.developer-3d-subtitle{font-size:7px;letter-spacing:1.2px}}
+
+/* Fix DEVELOPED BY alignment below the 3D signature */
+.developer-3d-signature{direction:ltr;align-items:center;gap:3px}
+.developer-3d-name{direction:rtl;text-align:center}
+.developer-3d-subtitle{display:block;direction:ltr;unicode-bidi:isolate;white-space:nowrap;text-align:center;width:auto;max-width:100%;font-family:Arial,sans-serif;font-size:9px;font-weight:700;line-height:1.5;letter-spacing:1.5px;transform:none;margin:0;padding:0;color:#a9eec2;text-shadow:0 0 6px #35e77a44}
+@media(max-width:700px){.developer-3d-signature{gap:2px}.developer-3d-subtitle{font-size:8px;letter-spacing:1px}}
