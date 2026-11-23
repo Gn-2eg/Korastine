@@ -21,7 +21,7 @@ module.exports=api(async(req,res)=>{
     const scores=node.find('.MResult .score').map((_,n)=>tidy($(n).text())).get();
     const time=tidy(node.find('.MResult .time').first().text());
     const status=tidy(node.parent().children('.matchStatus').first().text()||node.prevAll('.matchStatus').first().text());
-    matches.push({home,away,scores,time,status});
+    matches.push({home,away,scores,time,status,links:node.closest('a').attr('href')||node.find('a[href]').first().attr('href')||node.parent().find('a[href]').first().attr('href')||null});
    });
    if(name&&matches.length)leagues.push({name,matches});
   });
