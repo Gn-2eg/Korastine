@@ -138,3 +138,7 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .dev-spark{color:#57e6a6;margin-left:8px;font-size:16px}
 @media(max-width:700px){.developer-credit{padding:11px 14px;gap:10px;margin-top:19px}.dev-code-mark{width:36px;height:36px;font-size:16px}.developer-credit-label{font-size:8px;letter-spacing:1.4px}.developer-credit-name{font-size:13px}}
 @media(prefers-reduced-motion:reduce){.developer-credit{transition:none}}
+
+/* Arabic Ruqaa signature — developer name only */
+.developer-credit-name{font-family:'Aref Ruqaa',serif!important;font-weight:700;font-size:clamp(27px,5vw,35px);line-height:1.5;letter-spacing:0;color:#f0d18e;white-space:nowrap}
+@media(max-width:700px){.developer-credit-name{font-size:29px}}
