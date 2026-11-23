@@ -16,3 +16,103 @@
 .status.done .status-dot{background:#b8c4cc}
 @keyframes match-live-pulse{0%,100%{box-shadow:0 0 0 2px #29db8033;opacity:1}50%{box-shadow:0 0 0 7px #29db8000;opacity:.65}}
 @media(prefers-reduced-motion:reduce){.status.live .status-dot{animation:none}}
+
+/* KORASTINE mobile-first visual refinement */
+:root{--bg:#080e13;--panel:#111d25;--panel2:#1a2932;--line:#2a3b44;--red:#eb4453;--green:#32d58a;--gold:#f3ce83}
+body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#080e13}
+.header{box-shadow:0 10px 28px #0003}
+.btn,.match-card,.panel,.feature,.date-tabs button{transition:background .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.match-card{background:linear-gradient(150deg,#192832 0%,#111b23 75%);border-color:#ffffff1c;box-shadow:0 10px 25px #0002}
+.match-card:hover{border-color:#4d6a6b;transform:translateY(-2px)}
+.match-meta{border-bottom:1px solid #ffffff13;padding-bottom:12px;line-height:1.6}
+.match-meta span:first-child{font-weight:800;color:#e0e9ec}
+.match-teams{margin:19px 0 16px;gap:12px}
+.match-team{font-size:13px;line-height:1.6}
+.match-team img{width:52px;height:52px}
+.match-score{font-size:23px;padding:8px 6px;border-radius:10px;background:#071219;color:#fff}
+.match-bottom{border-top:1px solid #ffffff12;padding-top:13px;min-height:46px}
+.match-bottom button{background:#263c42;border-color:#3d6262}
+.match-bottom button:hover{background:#2d5852}
+.panel{box-shadow:0 12px 30px #0002}
+.feature{background:linear-gradient(150deg,#1b2b32,#101a21)}
+.section-heading h2{letter-spacing:-.3px}
+.notice{border-color:#355748;background:#12251f}
+.date-tabs{background:#101d25;border:1px solid #31444b;border-radius:13px;padding:5px;gap:4px}
+.date-tabs button{border:0;background:transparent;border-radius:9px;font-weight:800}
+.date-tabs button.active{background:linear-gradient(135deg,#e64b59,#b82d3e);box-shadow:0 4px 14px #e33d4b35}
+.toolbar select{border-radius:12px;background:#14232b;border-color:#3c525a}
+.match-day-heading{border-right:3px solid #db4754;background:linear-gradient(90deg,#122920,#17232b)}
+.mobile-bottom-nav{display:none}
+@media(min-width:701px){.match-grid{align-items:stretch}.match-card{height:100%}}
+@media(max-width:700px){
+ html,body{max-width:100%;overflow-x:clip}
+ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+ .container{padding-inline:14px}
+ .solidarity{font-size:9px;padding:5px 8px;letter-spacing:0}
+ .nav{min-height:61px;gap:8px;flex-wrap:nowrap}
+ .brand{font-size:19px;gap:6px}
+ .brand-icon{font-size:23px}
+ .brand small{font-size:8px;margin-top:3px;letter-spacing:1.8px}
+ .nav-actions{gap:7px}
+ #accountButton{max-width:126px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:9px 10px;font-size:10px}
+ .menu-toggle{width:38px;height:38px;flex:none;font-size:19px}
+ .nav-links{position:absolute;top:100%;right:0;left:0;padding:8px 16px 15px;background:#101b23;border-bottom:1px solid #35505a;box-shadow:0 16px 30px #0008}
+ .nav-links a{font-size:13px}
+ .hero{min-height:365px;background:linear-gradient(180deg,#080e1366,#080e13e8 83%),url('/hero.jpg') center/cover}
+ .hero-content{padding-block:38px 48px}
+ .eyebrow{font-size:10px;padding:6px 11px}
+ .hero h1{font-size:clamp(42px,11vw,56px);line-height:1.2;margin:16px 0 10px}
+ .hero p{font-size:12px;line-height:1.85;max-width:340px;margin-inline:auto}
+ .hero-actions{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:20px}
+ .hero-actions .btn{padding:12px 7px;font-size:11px}
+ .hero-foot{margin-top:20px;font-size:10px}
+ .hero-foot span{padding:0 4px}
+ .page-content{padding-block:23px 38px}
+ .feature-grid{gap:8px;margin-bottom:27px}
+ .feature{padding:13px 6px;border-radius:13px;gap:3px}
+ .feature span{font-size:23px}
+ .feature b{font-size:11px;line-height:1.5}
+ .feature small{font-size:9px;line-height:1.5}
+ .section-heading{gap:9px;margin:12px 0 15px}
+ .section-heading h2{font-size:21px;line-height:1.5}
+ .section-heading p{font-size:10px;line-height:1.7}
+ .kicker{font-size:9px}
+ .text-button{font-size:11px;white-space:nowrap}
+ .match-grid{grid-template-columns:minmax(0,1fr);gap:11px;margin-bottom:20px}
+ .match-card{padding:14px;border-radius:15px}
+ .match-meta{font-size:10px;gap:8px}
+ .match-teams{margin:14px 0;gap:7px}
+ .match-team{font-size:12px}
+ .match-team img{width:43px;height:43px;margin-bottom:6px}
+ .match-score{font-size:20px;padding:7px 5px}
+ .match-bottom{padding-top:11px;gap:5px}
+ .match-bottom button{font-size:10px;padding:8px}
+ .status{font-size:10px}
+ .two-col{grid-template-columns:minmax(0,1fr);gap:13px;margin-top:19px}
+ .panel{padding:17px;border-radius:15px}
+ .panel h3{font-size:16px}
+ .league-row{font-size:12px;padding:10px 0}
+ .toolbar{flex-direction:column;align-items:stretch;gap:10px}
+ .date-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;gap:3px;padding:4px}
+ .date-tabs button{width:100%;padding:10px 3px;font-size:11px}
+ .toolbar select{width:100%;min-width:0;font-size:12px}
+ .match-day-group{margin-bottom:23px}
+ .match-day-heading{padding:10px 12px;margin-bottom:11px}
+ .match-day-heading h3{font-size:14px}
+ .match-day-heading span{font-size:10px}
+ .notice{font-size:11px;padding:10px 12px}
+ .empty{padding:21px 13px;font-size:12px}
+ .auth-hint{flex-direction:column;align-items:stretch}
+ .prediction-row,.leader-row{font-size:11px;gap:7px;overflow-wrap:anywhere}
+ .watch-screen{min-height:230px}
+ .modal{padding:20px;border-radius:16px}
+ .score-inputs input{width:min(82px,24vw)}
+ .footer-inner{padding-bottom:12px}
+ .toast{bottom:calc(88px + env(safe-area-inset-bottom,0px));left:12px;right:12px;max-width:none}
+ .mobile-bottom-nav{position:fixed;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));bottom:0;left:0;right:0;z-index:55;padding:7px 7px calc(7px + env(safe-area-inset-bottom,0px));background:#0d1921f5;backdrop-filter:blur(18px);border-top:1px solid #36514f;box-shadow:0 -8px 30px #0008}
+ .mobile-bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;min-height:49px;border-radius:10px;font-size:10px;font-weight:800;color:#9cb0ba}
+ .mobile-bottom-nav a span{font-family:Arial,sans-serif;font-size:21px;line-height:1.1}
+ .mobile-bottom-nav a.active{background:#1d3936;color:#b3f6d0}
+}
+@media(max-width:360px){.brand{font-size:17px}#accountButton{max-width:105px;font-size:9px}.match-team{font-size:11px}.hero h1{font-size:40px}}
+@media(prefers-reduced-motion:reduce){.match-card,.btn{transition:none}.match-card:hover{transform:none}}
