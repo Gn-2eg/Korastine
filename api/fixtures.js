@@ -1,11 +1,37 @@
 'use strict';
 const {LEAGUES,dateCairo,allowedDate,json,api}=require('./_lib');
 const {fixtures}=require('./_sources');
+async function winwinStandings(){
+ const url='https://www.winwin.com/football/competition/'+encodeURIComponent('الدوري المصري')+'/'+encodeURIComponent('الترتيب');
+ const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),5000);
+ try{
+ const response=await fetch(url,{signal:ctrl.signal,headers:{Accept:'text/html'}});if(!response.ok)return [];
+ const $=require('cheerio').load(await response.text());
+ const groups=[];
+ $('table').each((_,table)=>{
+ const rows=[];
+ $(table).find('tr').each((_,tr)=>{
+ const cells=$(tr).find('td').map((i,td)=>$(td).text().trim().replace(/\s+/g,' ')).get();
+ if(cells.length<10)return;
+ const rank=Number(cells[0]),team=cells[1],nums=cells.slice(2,10).map(s=>/^-?\d+$/.test(s)?Number(s):NaN);
+ if(!Number.isInteger(rank)||rank<1||!team||nums.some(n=>!Number.isFinite(n)))return;
+ const [played,won,draw,lost,gf,ga,difference,points]=nums;
+ if(played!==won+draw+lost||gf-ga!==difference)return;
+ rows.push({rank,team,played,won,draw,lost,difference,points,logo:null});
+ });
+ if(rows.length>=2&&new Set(rows.map(r=>r.rank)).size===rows.length)groups.push({name:'الدوري المصري',rows});
+ });
+ return groups;
+ }finally{clearTimeout(timer);}
+}
 module.exports=api(async(req,res)=>{
  if(['standings','scorers'].includes(req.query?.mode)){
  const slugs={39:'eng.1',140:'esp.1',78:'ger.1',135:'ita.1',61:'fra.1',307:'sau.1',94:'por.1',88:'ned.1',203:'tur.1',233:'egy.1',2:'uefa.champions',3:'uefa.europa',253:'usa.1',12:'caf.champions',20:'caf.confed',17:'afc.champions'};
  const slug=slugs[Number(req.query.league)];
  if(!slug)return json(res,200,{groups:[],scorers:[],note:'الترتيب غير متاح لهذه البطولة'});
+ if(req.query.mode==='standings'&&Number(req.query.league)===233){
+ try{const groups=await winwinStandings();if(groups.length)return json(res,200,{groups,source:'WinWin'},300);}catch(_){}
+ }
  const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),8000);
  try{
  if(req.query.mode==='scorers'){
