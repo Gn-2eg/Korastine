@@ -26,7 +26,7 @@ module.exports=api(async(req,res)=>{
    if(name&&matches.length)leagues.push({name,matches});
   });
   const sample=$('.matchCard').first();
-  const debug=leagues.length?undefined:{cards:$('.matchCard').length,cardClass:sample.attr('class')||'',cardHeadings:sample.find('h2,h3').slice(0,5).map((_,n)=>tidy($(n).text())).get(),teamA:sample.find('.teamA').length,teamB:sample.find('.teamB').length,li:sample.find('li').length,matchNodes:sample.find('[class*=match]').slice(0,8).map((_,n)=>({tag:n.tagName,cls:$(n).attr('class')||'',text:tidy($(n).text()).slice(0,110)})).get(),sampleText:tidy(sample.text()).slice(0,900)};
+  const debug=leagues.length?undefined:{cards:$('.matchCard').length,cardClass:sample.attr('class')||'',cardHeadings:sample.find('h2,h3').slice(0,5).map((_,n)=>tidy($(n).text())).get(),teamA:sample.find('.teamA').length,teamB:sample.find('.teamB').length,li:sample.find('li').length,teamParent:sample.find('.teamA').first().parent().prop('outerHTML')?.slice(0,1800),teamGrandparent:sample.find('.teamA').first().parent().parent().prop('outerHTML')?.slice(0,3200),matchNodes:sample.find('[class*=match]').slice(0,8).map((_,n)=>({tag:n.tagName,cls:$(n).attr('class')||'',text:tidy($(n).text()).slice(0,110)})).get(),sampleText:tidy(sample.text()).slice(0,900)};
   return json(res,200,{date,source:'yallakora',leagueCount:leagues.length,matchCount:leagues.reduce((n,l)=>n+l.matches.length,0),leagues,debug},0);
  }catch(e){return json(res,502,{error:e.name==='AbortError'?'انتهت مهلة الاتصال بيلاكورة':e.message});}
  finally{clearTimeout(timer);}
