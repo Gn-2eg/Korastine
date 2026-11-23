@@ -242,11 +242,11 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 
 
 
-/* Fresh Korastine watch action: clean, compact, and visually distinct */
-.korastine-scorecard .match-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.korastine-scorecard .watch-next{display:inline-flex;align-items:center;gap:9px;min-height:40px;padding:5px 12px 5px 6px;border-radius:11px;background:linear-gradient(125deg,#173c34,#1b5242);border:1px solid #3a9977;color:#fff;direction:rtl;white-space:nowrap;box-shadow:0 3px 10px #0002}
-.korastine-scorecard .watch-next-icon{display:grid;place-items:center;width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:#e9fff5;color:#145c42;font-size:12px;padding-left:2px}
-.korastine-scorecard .watch-next-copy{display:flex;flex-direction:column;align-items:flex-start;gap:2px;line-height:1.1}
-.korastine-scorecard .watch-next-copy b{font-size:12px;font-weight:900}
-.korastine-scorecard .watch-next-copy small{font-size:9px;font-weight:700;color:#c0ded2}
-@media(max-width:480px){.korastine-scorecard .watch-next{min-height:35px;padding:4px 9px 4px 5px;gap:7px;border-radius:9px}.korastine-scorecard .watch-next-icon{width:24px;height:24px;flex-basis:24px;font-size:10px}.korastine-scorecard .watch-next-copy b{font-size:11px}}
+
+/* Compact disabled viewing placeholder */
+.korastine-scorecard .match-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:nowrap}
+.korastine-scorecard .watch-next{display:inline-flex;align-items:center;justify-content:center;gap:6px;max-width:125px;min-height:31px;padding:5px 9px;border-radius:9px;border:1px solid #397c69;background:#19382f;color:#e6fff3;direction:rtl;white-space:nowrap;font:700 11px/1.2 Cairo,Tahoma,sans-serif;box-shadow:none;flex:0 0 auto}
+.korastine-scorecard .watch-next-icon{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:50%;background:#3b9c78;color:white;font-size:9px;flex:0 0 17px}
+.korastine-scorecard .watch-next-copy{display:inline-flex;align-items:center;gap:4px;font:inherit;white-space:nowrap}
+.korastine-scorecard .watch-next-copy small{font:600 9px/1.2 Cairo,Tahoma,sans-serif;color:#a7cabb}
+@media(max-width:380px){.korastine-scorecard .watch-next{padding:4px 6px;gap:4px;max-width:110px}.korastine-scorecard .watch-next-copy{font-size:10px}.korastine-scorecard .watch-next-copy small{font-size:8px}}
