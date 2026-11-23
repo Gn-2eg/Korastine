@@ -6,3 +6,13 @@
 
 /* Day grouping in match center */
 #allMatches:has(.match-day-group){display:block}.match-day-group{margin-bottom:30px}.match-day-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 17px;margin-bottom:14px;border-radius:12px;background:#ffffff0b;border:1px solid #ffffff1b}.match-day-heading h3{margin:0;font-size:17px}.match-day-heading span{font-size:12px;color:var(--muted)}.date-tabs{display:flex;flex-wrap:wrap;gap:6px}.date-tabs button{white-space:nowrap}@media(max-width:700px){.date-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}.date-tabs button{padding-inline:5px;font-size:11px}}
+
+/* Automatic match status indicators */
+.status{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#9aa4ad;flex:none}
+.status.upcoming .status-dot{background:#f04a51;box-shadow:0 0 0 2px #f04a5120}
+.status.live{background:#123d2d;color:#8cf5b6}
+.status.live .status-dot{background:#29db80;box-shadow:0 0 0 3px #29db8022;animation:match-live-pulse 1.5s ease-in-out infinite}
+.status.done .status-dot{background:#b8c4cc}
+@keyframes match-live-pulse{0%,100%{box-shadow:0 0 0 2px #29db8033;opacity:1}50%{box-shadow:0 0 0 7px #29db8000;opacity:.65}}
+@media(prefers-reduced-motion:reduce){.status.live .status-dot{animation:none}}
