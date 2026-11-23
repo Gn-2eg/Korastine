@@ -265,3 +265,13 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .korastine-scorecard .match-info-item strong{color:#eefbf6;font-size:11px;font-weight:700;overflow-wrap:anywhere;line-height:1.6}
 @media(max-width:390px){.korastine-scorecard .match-info-grid{gap:5px}.korastine-scorecard .match-info-item{padding:8px 3px}.korastine-scorecard .match-info-item strong{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.korastine-scorecard .match-info-chevron{transition:none}}
+
+/* Match detail readability on mobile */
+.korastine-scorecard .match-info-grid{grid-template-columns:minmax(0,1fr);gap:5px;padding:8px 0 3px}
+.korastine-scorecard .match-info-item{flex-direction:row;justify-content:space-between;text-align:start;gap:12px;padding:8px 10px;border-radius:8px;background:#07111866}
+.korastine-scorecard .match-info-item>span{flex-shrink:0;font-size:12px}
+.korastine-scorecard .match-info-item strong{font-size:12px;text-align:end;min-width:0}
+.korastine-scorecard .match-meta{gap:8px;align-items:center}
+.korastine-scorecard .match-meta>span:first-child{min-width:0;overflow-wrap:anywhere}
+.korastine-scorecard .match-meta>span:last-child{flex-shrink:0}
+.korastine-scorecard .match-bottom{flex-wrap:wrap}
