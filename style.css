@@ -239,3 +239,10 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .korastine-scorecard.is-live .scoreboard-clock:after{inset:-7px;border:1px dashed #69e3ba66;animation:korastine-spin 22s linear infinite}
 .korastine-scorecard .goal-orb{font-size:12px;animation:korastine-ball-bob 1.8s ease-in-out infinite alternate}
 @media(max-width:480px){.korastine-scorecard .scoreboard-clock{width:64px;height:64px;flex-basis:64px}.korastine-scorecard .scoreboard-clock .clock-label{font-size:12px}.korastine-scorecard .scoreboard-clock:before,.korastine-scorecard.is-live .scoreboard-clock:before{inset:5px}}
+
+
+/* Reserved streaming action; non-interactive until a licensed link is available */
+.korastine-scorecard .match-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.korastine-scorecard .watch-slot{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:7px 13px;border-radius:12px;border:1px dashed #55d7ab77;background:#2b785a20;color:#a5e9cc;font-size:13px;font-weight:800;white-space:nowrap;opacity:.85}
+.korastine-scorecard .watch-slot small{font-size:10px;color:#8faeaa;font-weight:600}
+@media(max-width:400px){.korastine-scorecard .watch-slot{font-size:12px;padding:6px 9px}.korastine-scorecard .match-bottom{gap:6px}}
