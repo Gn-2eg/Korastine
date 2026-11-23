@@ -20,7 +20,7 @@ module.exports=api(async(req,res)=>{
     if(!home||!away)return;
     const scores=node.find('.MResult .score').map((_,n)=>tidy($(n).text())).get();
     const time=tidy(node.find('.MResult .time').first().text());
-    const status=tidy(node.find('.matchStatus').first().text());
+    const status=tidy(node.parent().children('.matchStatus').first().text()||node.prevAll('.matchStatus').first().text());
     matches.push({home,away,scores,time,status});
    });
    if(name&&matches.length)leagues.push({name,matches});
