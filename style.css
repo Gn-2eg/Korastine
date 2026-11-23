@@ -159,3 +159,11 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .developer-cyberpunk .cyberpunk-accent{display:block;width:60px;height:2px;border-radius:99px;background:linear-gradient(90deg,transparent,#b883ff,transparent)}
 @media(max-width:700px){.developer-credit.developer-cyberpunk{padding:16px 22px;margin-top:17px;gap:6px}.developer-cyberpunk .developer-credit-name{font-size:32px}.developer-cyberpunk .cyberpunk-caption{font-size:8px;letter-spacing:1.4px}}
 @media(prefers-reduced-motion:reduce){.developer-credit.developer-cyberpunk{transition:none}}
+
+/* Compact cyberpunk footer signature, especially on phones */
+.developer-credit.developer-cyberpunk{padding:12px 20px 11px;gap:4px;margin:14px auto 0;border-radius:13px;max-width:calc(100% - 32px)}
+.developer-cyberpunk .cyberpunk-badge{font-size:8px;letter-spacing:1.4px;padding:3px 9px}
+.developer-cyberpunk .developer-credit-name{font-size:clamp(24px,3.5vw,30px);line-height:1.4}
+.developer-cyberpunk .cyberpunk-caption{font-size:8px;letter-spacing:1.3px}
+.developer-cyberpunk .cyberpunk-accent{width:40px;height:1px}
+@media(max-width:700px){.developer-credit.developer-cyberpunk{padding:10px 16px 9px;gap:3px;margin-top:12px;border-radius:12px}.developer-cyberpunk .developer-credit-name{font-size:25px}.developer-cyberpunk .cyberpunk-caption{font-size:7px;letter-spacing:1px}}
