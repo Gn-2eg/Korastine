@@ -15,7 +15,7 @@ module.exports=api(async(req,res)=>{
   $('.matchCard').each((_,el)=>{
    const card=$(el),name=tidy(card.find('h2').first().text());
    const matches=[];
-   card.find('.gameCntnr').each((_,game)=>{
+   card.find('.teamCntnr').each((_,game)=>{
     const node=$(game),home=tidy(node.find('.teamA p').first().text()),away=tidy(node.find('.teamB p').first().text());
     if(!home||!away)return;
     const scores=node.find('.MResult .score').map((_,n)=>tidy($(n).text())).get();
