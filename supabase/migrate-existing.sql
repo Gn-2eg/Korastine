@@ -20,6 +20,9 @@ ALTER TABLE public.profiles ALTER COLUMN display_name SET DEFAULT 'مشجع كو
 ALTER TABLE public.profiles ALTER COLUMN display_name SET NOT NULL;
 
 -- The existing predictions table was confirmed empty; convert its text ID safely.
+-- The legacy foreign key points to a text-based fixtures table. The API validates real fixture IDs before saving.
+-- Predictions were verified empty, so remove only this obsolete constraint before converting the ID.
+ALTER TABLE public.predictions DROP CONSTRAINT IF EXISTS predictions_fixture_id_fkey;
 ALTER TABLE public.predictions ALTER COLUMN fixture_id TYPE bigint USING fixture_id::bigint;
 ALTER TABLE public.predictions ADD COLUMN IF NOT EXISTS league_id integer;
 ALTER TABLE public.predictions ADD COLUMN IF NOT EXISTS kickoff timestamptz;
