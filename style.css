@@ -275,3 +275,6 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .korastine-scorecard .match-meta>span:first-child{min-width:0;overflow-wrap:anywhere}
 .korastine-scorecard .match-meta>span:last-child{flex-shrink:0}
 .korastine-scorecard .match-bottom{flex-wrap:wrap}
+
+/* Transparent team crest presentation */
+.korastine-scorecard .match-team img{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;object-fit:contain}
