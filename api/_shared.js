@@ -39,6 +39,7 @@ async function upstream(endpoint){
 function api(handler){
   return async function(req,res){
     res.setHeader('Content-Type','application/json; charset=utf-8');
+    res.setHeader('Cache-Control','public, s-maxage=900, stale-while-revalidate=300');
     res.setHeader('X-Content-Type-Options','nosniff');
     if(req.method!=='GET')return res.status(405).json({error:'Method not allowed'});
     try {return res.status(200).json(await handler());}
