@@ -1,1 +1,14 @@
-{"version":2,"functions":{"api/*.js":{"maxDuration":10}}}
+{
+  "version": 2,
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 10
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/settle",
+      "schedule": "30 23 * * *"
+    }
+  ]
+}
