@@ -167,3 +167,11 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .developer-cyberpunk .cyberpunk-caption{font-size:8px;letter-spacing:1.3px}
 .developer-cyberpunk .cyberpunk-accent{width:40px;height:1px}
 @media(max-width:700px){.developer-credit.developer-cyberpunk{padding:10px 16px 9px;gap:3px;margin-top:12px;border-radius:12px}.developer-cyberpunk .developer-credit-name{font-size:25px}.developer-cyberpunk .cyberpunk-caption{font-size:7px;letter-spacing:1px}}
+
+/* Floating 3D developer signature: no footer box, no card */
+.developer-3d-signature{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;width:100%;max-width:100%;padding:13px 12px calc(18px + env(safe-area-inset-bottom,0px));margin:0 auto;background:transparent;border:0;box-shadow:none;text-align:center;overflow:visible}
+.developer-3d-name{display:block;font-family:'Aref Ruqaa',serif;font-weight:700;font-size:clamp(30px,5vw,43px);line-height:1.7;white-space:nowrap;color:#f2d8ff;text-shadow:1px 1px 0 #9b62e5,2px 2px 0 #7d45c0,3px 3px 0 #5c2e8e,4px 5px 3px #260f3d,0 0 13px #c07aff90,0 0 30px #9e55ff66;transform:rotate(-2deg);transition:transform .2s ease,text-shadow .2s ease}
+.developer-3d-name:hover{transform:rotate(-2deg) translateY(-2px);text-shadow:1px 1px 0 #9b62e5,2px 2px 0 #7d45c0,3px 3px 0 #5c2e8e,5px 7px 5px #260f3d,0 0 18px #c07affb0,0 0 38px #9e55ff77}
+.developer-3d-subtitle{font:700 9px/1.5 Arial,sans-serif;letter-spacing:3px;color:#c4a1df;text-shadow:0 0 10px #a96aff55}
+@media(max-width:700px){.developer-3d-signature{padding:8px 10px calc(90px + env(safe-area-inset-bottom,0px))}.developer-3d-name{font-size:32px}.developer-3d-subtitle{font-size:8px;letter-spacing:2px}}
+@media(prefers-reduced-motion:reduce){.developer-3d-name{transition:none}}
