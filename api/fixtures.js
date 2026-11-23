@@ -26,10 +26,35 @@ async function winwinStandings(id){
  return groups;
  }finally{clearTimeout(timer);}
 }
+async function winwinScorers(id){
+ const name=winwinNames[id];if(!name)return [];
+ const url='https://www.winwin.com/football/competition/'+encodeURIComponent(name.replace(/ /g,'-'))+'/'+encodeURIComponent('ترتيب-اللاعبين');
+ const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),5000);
+ try{
+ const response=await fetch(url,{signal:ctrl.signal,headers:{Accept:'text/html'}});if(!response.ok)return [];
+ const $=require('cheerio').load(await response.text());
+ const heading=$('h2,h3,h4').filter((_,e)=>$(e).text().trim()==='الأهداف').first();
+ if(!heading.length)return [];
+ const rows=[];
+ for(let el=heading.parent(),depth=0;el.length&&depth<4;el=el.parent(),depth++){
+ if(el.find('h2,h3,h4').filter((_,e)=>$(e).text().trim()!=='الأهداف').length)break;
+ el.find('tr,li').each((_,row)=>{
+ const cells=$(row).find('td').map((i,e)=>$(e).text().trim()).get();
+ if(cells.length<2||cells.length>4)return;
+ const goals=Number(cells[cells.length-1]);if(!/^\d+$/.test(cells[cells.length-1])||!Number.isInteger(goals))return;
+ const name=cells[0];if(!name||/^\d+$/.test(name))return;
+ rows.push({name,team:cells.length===3?cells[1]:null,goals});
+ });
+ if(rows.length)break;
+ }
+ return rows;
+ }finally{clearTimeout(timer);}
+}
 module.exports=api(async(req,res)=>{
  if(['standings','scorers'].includes(req.query?.mode)){
  const slugs={39:'eng.1',140:'esp.1',78:'ger.1',135:'ita.1',61:'fra.1',307:'sau.1',94:'por.1',88:'ned.1',203:'tur.1',233:'egy.1',2:'uefa.champions',3:'uefa.europa',253:'usa.1',12:'caf.champions',20:'caf.confed',17:'afc.champions'};
  const slug=slugs[Number(req.query.league)];
+ if(req.query.mode==='scorers'){try{const scorers=await winwinScorers(Number(req.query.league));if(scorers.length)return json(res,200,{scorers,source:'WinWin'},300);}catch(_){}}
  if(!slug)return json(res,200,{groups:[],scorers:[],note:'الترتيب غير متاح لهذه البطولة'});
  if(req.query.mode==='standings'){
  try{const groups=await winwinStandings(Number(req.query.league));if(groups.length)return json(res,200,{groups,source:'WinWin'},300);}catch(_){}
