@@ -175,3 +175,10 @@ body{background:radial-gradient(ellipse at 100% 0%,#17362d 0%,transparent 42%),#
 .developer-3d-subtitle{font:700 9px/1.5 Arial,sans-serif;letter-spacing:3px;color:#c4a1df;text-shadow:0 0 10px #a96aff55}
 @media(max-width:700px){.developer-3d-signature{padding:8px 10px calc(90px + env(safe-area-inset-bottom,0px))}.developer-3d-name{font-size:32px}.developer-3d-subtitle{font-size:8px;letter-spacing:2px}}
 @media(prefers-reduced-motion:reduce){.developer-3d-name{transition:none}}
+
+/* Smaller green 3D signature */
+.developer-3d-signature{padding:5px 10px 12px;gap:0}
+.developer-3d-name{font-size:clamp(20px,2.8vw,26px);line-height:1.45;color:#dcffe9;text-shadow:1px 1px 0 #3fc77b,2px 2px 0 #218e53,3px 3px 1px #115c38,3px 4px 3px #073d26,0 0 9px #4cff9780,0 0 19px #23dc7360}
+.developer-3d-name:hover{text-shadow:1px 1px 0 #3fc77b,2px 2px 0 #218e53,3px 3px 1px #115c38,4px 5px 4px #073d26,0 0 12px #4cff9799,0 0 23px #23dc7370}
+.developer-3d-subtitle{font-size:7px;letter-spacing:1.5px;color:#88d6a6;text-shadow:0 0 7px #35e77a44}
+@media(max-width:700px){.developer-3d-signature{padding:3px 8px calc(78px + env(safe-area-inset-bottom,0px))}.developer-3d-name{font-size:22px}.developer-3d-subtitle{font-size:7px;letter-spacing:1.2px}}
